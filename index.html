@@ -12,7 +12,9 @@
   :root {
     --bg: #0a0a0a;
     --bg-card: #111111;
+    --bg-table: #0f0f0f;
     --text: #e8e4de;
+    --text-bright: #ffffff;
     --text-muted: #8a8580;
     --text-dim: #5a5550;
     --accent: #c9a84c;
@@ -150,6 +152,12 @@
     font-weight: 400;
   }
 
+  .section-body a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-dim);
+  }
+
   .section-divider {
     width: 40px;
     height: 1px;
@@ -257,6 +265,11 @@
     line-height: 1.7;
   }
 
+  .timeline-text strong {
+    color: var(--text);
+    font-weight: 400;
+  }
+
   /* === QUOTE === */
   .pull-quote {
     font-family: var(--font-display);
@@ -271,14 +284,64 @@
     max-width: 600px;
   }
 
-  .pull-quote-source {
-    font-family: var(--font-body);
-    font-size: 0.72rem;
-    font-style: normal;
+  /* === CTA / CLOSING === */
+  .cta-block {
+    text-align: center;
+    padding: 3rem 0;
+    margin: 2rem 0;
+  }
+
+  .cta-text {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-bright);
+    line-height: 1.3;
+  }
+
+  /* === STANDINGS TABLE === */
+  .standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.85rem;
+  }
+
+  .standings-table th {
+    font-size: 0.65rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--text-dim);
-    margin-top: 0.75rem;
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 400;
+  }
+
+  .standings-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .standings-table tr:hover td {
+    color: var(--text);
+  }
+
+  .standings-table .player-name {
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .standings-table .us-flag {
+    color: var(--accent);
+  }
+
+  .standings-table .score {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--accent);
   }
 
   /* === FOOTER === */
@@ -360,6 +423,9 @@
       Two buildings stand ready — a 1924 Neoclassical dome and a 1920s Gothic Revival sanctuary — at the intersection of Delmar, Trinity, and Washington in University City. Together, they offer something no previous World Championship venue has had: architecture built for ceremony, acoustics shaped by a century of congregation, and a city that already believes chess matters.
     </div>
 
+    <img class="img-full" src="images/campus-aerial.jpg" alt="6900 Delmar and 6901 Washington — aerial view">
+    <div class="img-caption">6900 Delmar (dome) and 6901 Washington (bell tower) — University City, Missouri</div>
+
   </div>
 
   <!-- ======== TAB: THE VENUE ======== -->
@@ -373,11 +439,8 @@
       A Gothic Revival church built in the 1920s. Stone masonry, pointed arch windows, stained glass intact, a bell tower visible from blocks away. <strong>21,884 square feet.</strong> A sanctuary with raked seating, a balcony, and a chancel that faces the congregation like a stage faces an audience.
     </div>
 
-    <img class="img-full" src="images/6901-exterior.jpg" alt="6901 Washington Avenue exterior — Gothic Revival, stone bell tower, red door">
-    <div class="img-caption">6901 Washington Avenue — Exterior</div>
-
     <img class="img-full" src="images/chess-table-sanctuary.jpg" alt="Chess table staged on the 6901 sanctuary platform — overhead view, stained glass light">
-    <div class="img-caption">Chess table staged in the sanctuary — stained glass light falling on the board</div>
+    <div class="img-caption">6901 Washington — chess table on the sanctuary stage, stained glass light on the board</div>
 
     <div class="section-divider"></div>
 
@@ -386,11 +449,8 @@
     <div class="section-title">Soundproof Match Enclosure</div>
 
     <div class="section-body">
-      FIDE World Championship matches are played inside a soundproof glass enclosure — triple-pane acoustic glass with a controlled environment system. The players sit at a single board. The audience watches from the outside, in silence. The enclosure sits on the chancel — the raised platform at the front of the sanctuary, exactly where the altar once stood.
+      FIDE World Championship matches are played inside a soundproof glass enclosure — triple-pane acoustic glass with a controlled environment system. The players sit at a single board. The audience watches in silence. The enclosure sits on the chancel — the raised platform at the front of the sanctuary, exactly where the altar once stood.
     </div>
-
-    <img class="img-full" src="images/section-annotated.png" alt="Sectional elevation of 6901 Washington — annotated for World Chess Championship venue conversion">
-    <div class="img-caption">Sectional Elevation — View Looking North — Annotated for Championship Configuration</div>
 
     <div class="section-body">
       The organ chambers flanking the chancel — elevated rooms with direct sightlines to the board — become <strong>VIP viewing galleries</strong>. Unprecedented overhead views directly onto the chess board. Private. Intimate. The kind of vantage that doesn't exist at any previous World Championship venue.
@@ -400,13 +460,10 @@
       Below the chancel, the existing classroom and office spaces convert to <strong>player preparation and recovery suites</strong> — each with a cot, desk, private en-suite bathroom, and exercise equipment. Symmetrical. Identical. FIDE-compliant.
     </div>
 
-    <div class="section-divider"></div>
-
-    <div class="section-label">Visionary Concept</div>
+    <img class="img-full" src="images/section-annotated.png" alt="Sectional elevation of 6901 Washington — annotated for World Chess Championship venue conversion">
+    <div class="img-caption">Sectional Elevation — View Looking North — Championship Configuration</div>
 
     <img class="img-full" src="images/section-dollhouse.png" alt="Sectional model — dollhouse cutaway of 6901 championship venue">
-
-    <img class="img-full" src="images/section-workshop.png" alt="Sectional model — workshop render, Wes Anderson aesthetic">
     <div class="img-caption">Visionary Arena Concept — Sectional Model</div>
 
     <div class="stat-row">
@@ -437,21 +494,36 @@
 
     <div class="section-title">Two Buildings, One Block</div>
 
-    <img class="img-full" src="images/campus-aerial.jpg" alt="Aerial view — 6900 Delmar and 6901 Washington, University City">
-    <div class="img-caption">6900 Delmar (dome) and 6901 Washington (bell tower) — from the northeast</div>
-
     <div class="section-body">
-      At the intersection of Delmar Boulevard, Trinity Avenue, and Washington Avenue in University City — surrounded by COCA (Center of Creative Arts) and the Washington University Music Center — two churches built four years apart sit on a single block. Both are being transformed into a cultural campus.
+      At the intersection of Delmar Boulevard, Trinity Avenue, and Washington Avenue in University City — surrounded by COCA (Center of Creative Arts) and the Washington University Music Center — two churches built four years apart sit on a single block. Both are being transformed into a cultural campus. <strong>Both buildings are owned, not leased.</strong>
     </div>
+
+    <img class="img-full" src="images/campus-aerial.jpg" alt="Aerial view — 6900 Delmar and 6901 Washington, University City">
+    <div class="img-caption">6900 Delmar (dome) and 6901 Washington (bell tower)</div>
 
     <div class="section-divider"></div>
 
+    <!-- 6901 FIRST -->
+    <div class="section-label">6901 Washington — Mystery</div>
+
+    <div class="section-title">The Sanctuary</div>
+
+    <div class="section-body">
+      Gothic Revival. Stone masonry, stained glass, bell tower. A sanctuary with raked seating and a balcony. Ten classrooms, a fellowship hall, kitchen, offices, and a library. <strong>21,884 square feet.</strong> The building that becomes the championship venue — and continues as a performance, event, and cultural space long after the match ends.
+    </div>
+
+    <img class="img-full" src="images/6901-exterior.jpg" alt="6901 Washington exterior — Gothic Revival">
+    <div class="img-caption">6901 Washington Avenue — Exterior</div>
+
+    <div class="section-divider"></div>
+
+    <!-- 6900 SECOND -->
     <div class="section-label">6900 Delmar — Reason</div>
 
     <div class="section-title">The Dome</div>
 
     <div class="section-body">
-      Former First Church of Christ, Scientist. Completed 1924. T.P. Barnett Co., Architects. <strong>Individually listed on the National Register of Historic Places.</strong> A 78-foot coffered plaster dome suspended from a 1927 steel truss roof structure. Original chandelier hoist system intact. Accessible catwalk in the void above the dome. Spiral staircases. Reading rooms. A foyer and mezzanine wrapped around the auditorium.
+      Former First Church of Christ, Scientist. Completed 1924. T.P. Barnett Co., Architects. <strong>Individually listed on the National Register of Historic Places.</strong> A 78-foot coffered plaster dome suspended from a 1927 steel truss roof structure. Original chandelier hoist system intact. Accessible catwalk in the 23-foot void above the dome. Spiral staircases. Reading rooms. A foyer and mezzanine wrapped around the auditorium.
     </div>
 
     <div class="stat-row">
@@ -469,47 +541,32 @@
       </div>
     </div>
 
-    <div class="img-grid-2">
-      <img src="images/dome-interior.jpg" alt="6900 Delmar — coffered dome interior from mezzanine">
-      <img src="images/dome-truss.jpg" alt="6900 Delmar — 1927 steel truss structure above dome">
-    </div>
-    <div class="img-caption">Left: Coffered dome from the mezzanine. Right: 1927 steel truss structure — 23 ft void above the plaster dome.</div>
+    <img class="img-full" src="images/dome-interior.jpg" alt="6900 Delmar — coffered dome interior">
+    <div class="img-caption">6900 Delmar — coffered dome from the mezzanine</div>
+
+    <img class="img-full" src="images/dome-truss.jpg" alt="6900 Delmar — 1927 steel truss structure above dome">
+    <div class="img-caption">Above the dome — 1927 steel truss structure, original chandelier hoist</div>
 
     <div class="section-divider"></div>
 
-    <div class="section-label">6901 Washington — Mystery</div>
-
-    <div class="section-title">The Sanctuary</div>
-
-    <div class="section-body">
-      Gothic Revival. Stone masonry, stained glass, bell tower. A 250-seat sanctuary with raked seating and a 60-seat balcony. Ten classrooms, a fellowship hall, kitchen, offices, and a library. The building that becomes the championship venue — and continues as a performance, event, and cultural space long after the match ends.
-    </div>
-
-    <img class="img-full" src="images/6901-interior-vision.jpg" alt="6901 Washington — sanctuary interior, current and vision">
-    <div class="img-caption">6901 Washington — current condition and vision studies</div>
-
-    <div class="section-body">
-      <strong>The buildings are owned, not leased.</strong> No rent burden. No landlord. The campus vision doesn't depend on a single event — the World Chess Championship is a catalyst, not a business plan. The buildings are the business plan.
-    </div>
-
-    <img class="img-full" src="images/banner-6900.jpg" alt="Banner mockup on 6900 Delmar facade — 2026 World Chess Championship">
-    <div class="img-caption">6900 Delmar — banner visualization</div>
+    <img class="img-full" src="images/banner-6900.jpg" alt="6900 Delmar with championship banner visualization">
+    <div class="img-caption">6900 Delmar — signage visualization</div>
 
   </div>
 
   <!-- ======== TAB: THE SET ======== -->
   <div id="tab-set" class="tab-panel">
 
-    <div class="section-label">Proof of Concept</div>
+    <div class="section-label">STL vs STL</div>
 
-    <div class="section-title">The St. Louis Chess Set</div>
+    <div class="section-title">St. Louis Playing for Its Future</div>
 
     <div class="section-body">
       A custom chess set designed for St. Louis. Every piece represents a civic landmark, cultural institution, or identity. The King is the Saint Louis Chess Club. The Rooks are the two buildings — 6900 Delmar and 6901 Washington. The Queen carries the rivers and the fleur-de-lis. The Knight is a Budweiser Clydesdale. The Bishops bear the Cardinals and the Blues. The Pawns are fleur-de-lis.
     </div>
 
     <div class="section-body">
-      Red and gold — from the city flag. Red for the field: courage, the blood that built this place. Gold for the bezant: the city itself, the convergence point.
+      Red and gold — from the city flag. Red for the field: courage, the blood that built this place. Gold for the bezant: the city itself, the convergence point. The distinction is finish, not allegiance. Both sides are St. Louis.
     </div>
 
     <div class="img-grid-2">
@@ -532,8 +589,8 @@
     </div>
 
     <div class="section-body">
-      The full set — including board design, piece descriptions, and fabrication detail — is live at:<br>
-      <a href="https://micahroufa.github.io/stlchess/stl-chess-set.html" target="_blank" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim);">micahroufa.github.io/stlchess</a>
+      The full set — board design, piece descriptions, and fabrication detail — is live at:<br>
+      <a href="https://micahroufa.github.io/stlchess/stl-chess-set.html" target="_blank">micahroufa.github.io/stlchess</a>
     </div>
 
   </div>
@@ -549,9 +606,80 @@
       The FIDE Candidates Tournament is underway in Cyprus. Eight grandmasters are competing for the right to challenge World Champion Gukesh Dommaraju. <strong>Two of them are American.</strong>
     </div>
 
+    <!-- STANDINGS TABLE — update after each round -->
+    <div class="section-label" style="margin-top: 2rem;">Candidates Standings — Round 1 of 14</div>
+
+    <table class="standings-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>Rating</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- UPDATE THESE ROWS AFTER EACH ROUND -->
+        <tr>
+          <td>1</td>
+          <td class="player-name"><span class="us-flag">🇺🇸</span> Fabiano Caruana</td>
+          <td>2804</td>
+          <td class="score">—</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td class="player-name"><span class="us-flag">🇺🇸</span> Hikaru Nakamura</td>
+          <td>2810</td>
+          <td class="score">—</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td class="player-name">Praggnanandhaa R.</td>
+          <td>2773</td>
+          <td class="score">—</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td class="player-name">Anish Giri</td>
+          <td>2761</td>
+          <td class="score">—</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td class="player-name">Wei Yi</td>
+          <td>2755</td>
+          <td class="score">—</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td class="player-name">Javokhir Sindarov</td>
+          <td>2747</td>
+          <td class="score">—</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td class="player-name">Matthias Bluebaum</td>
+          <td>2713</td>
+          <td class="score">—</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td class="player-name">Andrey Esipenko</td>
+          <td>2709</td>
+          <td class="score">—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-body" style="font-size: 0.8rem; color: var(--text-dim);">
+      Live games: <a href="https://lichess.org/broadcast/fide-candidates-2026-open/BLA70Vds" target="_blank">lichess.org/broadcast</a>
+    </div>
+
+    <div class="section-divider"></div>
+
     <div class="timeline-item">
       <div class="timeline-date">March 28 – April 16, 2026</div>
-      <div class="timeline-text"><strong>FIDE Candidates Tournament</strong> — Paphos, Cyprus. Fabiano Caruana (world #1 classical rating, St. Louis ties) and Hikaru Nakamura (world #2, major online presence) are both in the field. If either wins, the next World Champion could be American.</div>
+      <div class="timeline-text"><strong>FIDE Candidates Tournament</strong> — Paphos, Cyprus. Caruana and Nakamura are both in the field. If either wins, the next World Champion could be American — and St. Louis will be at the center of the chess world.</div>
     </div>
 
     <div class="timeline-item">
@@ -570,9 +698,8 @@
       St. Louis already hosts the Grand Chess Tour Finals, the Sinquefield Cup, and the U.S. Championship. The broadcast infrastructure exists. The institutional knowledge exists. The audience exists. What doesn't yet exist is a venue that matches the ambition.
     </div>
 
-    <div class="pull-quote">
-      The first World Chess Championship was held in St. Louis in 1886. The buildings at 6900 Delmar and 6901 Washington are ready to bring it home.
-      <div class="pull-quote-source">Come see them.</div>
+    <div class="cta-block">
+      <div class="cta-text">Come see the buildings.</div>
     </div>
 
   </div>
