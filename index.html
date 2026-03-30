@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>140 Years Later, It Returns</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0a;
+    --bg-card: #111111;
+    --text: #e8e4de;
+    --text-muted: #8a8580;
+    --text-dim: #5a5550;
+    --accent: #c9a84c;
+    --accent-dim: #8a7535;
+    --red: #b5564d;
+    --border: #222;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === HEADER === */
+  .header {
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-sub {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--accent);
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+
+  .header-location {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 1rem;
+  }
+
+  /* === NAV === */
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+
+  .nav button {
+    background: none;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .nav button:hover { color: var(--text); }
+
+  .nav button.active {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+  }
+
+  /* === CONTENT === */
+  .content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* === TYPOGRAPHY === */
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-body {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    max-width: 680px;
+  }
+
+  .section-body strong {
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .section-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--accent-dim);
+    margin: 3rem 0;
+  }
+
+  /* === IMAGES === */
+  .img-full {
+    width: 100%;
+    border-radius: 2px;
+    margin: 2rem 0;
+    display: block;
+  }
+
+  .img-caption {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: -1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .img-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .img-grid-2 img {
+    width: 100%;
+    border-radius: 2px;
+  }
+
+  .img-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .img-grid-3 img {
+    width: 100%;
+    border-radius: 2px;
+  }
+
+  /* === STAT BLOCK === */
+  .stat-row {
+    display: flex;
+    gap: 3rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+  }
+
+  /* === TIMELINE === */
+  .timeline-item {
+    border-left: 1px solid var(--accent-dim);
+    padding: 0 0 2.5rem 1.5rem;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 0.3rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .timeline-date {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* === QUOTE === */
+  .pull-quote {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.5;
+    border-left: 2px solid var(--accent);
+    padding-left: 1.5rem;
+    margin: 2.5rem 0;
+    max-width: 600px;
+  }
+
+  .pull-quote-source {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-style: normal;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.75rem;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-line {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.3rem;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 640px) {
+    .content { padding: 2rem 1.25rem 3rem; }
+    .img-grid-2 { grid-template-columns: 1fr; }
+    .img-grid-3 { grid-template-columns: 1fr; }
+    .stat-row { gap: 1.5rem; }
+    .nav button { font-size: 0.65rem; padding: 0.5rem 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<div class="header">
+  <div class="header-sub">Delmar &middot; Trinity &middot; Washington</div>
+  <h1>140 Years Later, It Returns</h1>
+  <div class="header-location">St. Louis, Missouri</div>
+</div>
+
+<!-- ============ NAV ============ -->
+<div class="nav">
+  <button class="active" onclick="showTab('1886')">1886</button>
+  <button onclick="showTab('venue')">The Venue</button>
+  <button onclick="showTab('campus')">The Campus</button>
+  <button onclick="showTab('set')">The Set</button>
+  <button onclick="showTab('moment')">The Moment</button>
+</div>
+
+<!-- ============ CONTENT ============ -->
+<div class="content">
+
+  <!-- ======== TAB: 1886 ======== -->
+  <div id="tab-1886" class="tab-panel active">
+
+    <div class="section-label">The First World Chess Championship</div>
+
+    <div class="section-title">St. Louis, 1886</div>
+
+    <div class="section-body">
+      The first official World Chess Championship match in history — Wilhelm Steinitz versus Johannes Zukertort — was played across three American cities from January to March 1886: New York, St. Louis, and New Orleans. <strong>The St. Louis games were played at the Harmonie Club, 18th and Olive Streets.</strong>
+    </div>
+
+    <div class="section-body">
+      Zukertort arrived in St. Louis leading 4–1. He left tied 4–4. Steinitz won three straight games on this ground and turned the entire match. He went on to win 10–5 in New Orleans and became the first recognized World Chess Champion.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="section-body">
+      In the 140 years since, <strong>no World Chess Championship match has returned to St. Louis.</strong>
+    </div>
+
+    <div class="section-body">
+      In that same span, St. Louis became the Chess Capital of the United States — recognized by Congress, home to the Saint Louis Chess Club, the World Chess Hall of Fame, the Sinquefield Cup, the U.S. Championship, and a broadcast operation that reaches over 100,000 live viewers worldwide.
+    </div>
+
+    <div class="pull-quote">
+      And so it returns. 140 years later.
+    </div>
+
+    <div class="section-body">
+      Two buildings stand ready — a 1924 Neoclassical dome and a 1920s Gothic Revival sanctuary — at the intersection of Delmar, Trinity, and Washington in University City. Together, they offer something no previous World Championship venue has had: architecture built for ceremony, acoustics shaped by a century of congregation, and a city that already believes chess matters.
+    </div>
+
+  </div>
+
+  <!-- ======== TAB: THE VENUE ======== -->
+  <div id="tab-venue" class="tab-panel">
+
+    <div class="section-label">6901 Washington Avenue</div>
+
+    <div class="section-title">The Venue</div>
+
+    <div class="section-body">
+      A Gothic Revival church built in the 1920s. Stone masonry, pointed arch windows, stained glass intact, a bell tower visible from blocks away. <strong>21,884 square feet.</strong> A sanctuary with raked seating, a balcony, and a chancel that faces the congregation like a stage faces an audience.
+    </div>
+
+    <img class="img-full" src="images/6901-exterior.jpg" alt="6901 Washington Avenue exterior — Gothic Revival, stone bell tower, red door">
+    <div class="img-caption">6901 Washington Avenue — Exterior</div>
+
+    <img class="img-full" src="images/chess-table-sanctuary.jpg" alt="Chess table staged on the 6901 sanctuary platform — overhead view, stained glass light">
+    <div class="img-caption">Chess table staged in the sanctuary — stained glass light falling on the board</div>
+
+    <div class="section-divider"></div>
+
+    <div class="section-label">The Fish Tank</div>
+
+    <div class="section-title">Soundproof Match Enclosure</div>
+
+    <div class="section-body">
+      FIDE World Championship matches are played inside a soundproof glass enclosure — triple-pane acoustic glass with a controlled environment system. The players sit at a single board. The audience watches from the outside, in silence. The enclosure sits on the chancel — the raised platform at the front of the sanctuary, exactly where the altar once stood.
+    </div>
+
+    <img class="img-full" src="images/section-annotated.png" alt="Sectional elevation of 6901 Washington — annotated for World Chess Championship venue conversion">
+    <div class="img-caption">Sectional Elevation — View Looking North — Annotated for Championship Configuration</div>
+
+    <div class="section-body">
+      The organ chambers flanking the chancel — elevated rooms with direct sightlines to the board — become <strong>VIP viewing galleries</strong>. Unprecedented overhead views directly onto the chess board. Private. Intimate. The kind of vantage that doesn't exist at any previous World Championship venue.
+    </div>
+
+    <div class="section-body">
+      Below the chancel, the existing classroom and office spaces convert to <strong>player preparation and recovery suites</strong> — each with a cot, desk, private en-suite bathroom, and exercise equipment. Symmetrical. Identical. FIDE-compliant.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="section-label">Visionary Concept</div>
+
+    <img class="img-full" src="images/section-dollhouse.png" alt="Sectional model — dollhouse cutaway of 6901 championship venue">
+
+    <img class="img-full" src="images/section-workshop.png" alt="Sectional model — workshop render, Wes Anderson aesthetic">
+    <div class="img-caption">Visionary Arena Concept — Sectional Model</div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-value">~310</div>
+        <div class="stat-label">Sanctuary seats + balcony</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">23'–8"</div>
+        <div class="stat-label">Chancel span</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">21,884</div>
+        <div class="stat-label">Total SF</div>
+      </div>
+    </div>
+
+    <div class="section-body">
+      FIDE minimum stage requirement: 15–20 ft wide × 10–15 ft deep. The chancel at 6901 exceeds this comfortably. The raked sanctuary seating, the balcony, the Gothic verticality — this is a space designed for focused attention on a single elevated point. It has been doing this for a century.
+    </div>
+
+  </div>
+
+  <!-- ======== TAB: THE CAMPUS ======== -->
+  <div id="tab-campus" class="tab-panel">
+
+    <div class="section-label">The Four Corners</div>
+
+    <div class="section-title">Two Buildings, One Block</div>
+
+    <img class="img-full" src="images/campus-aerial.jpg" alt="Aerial view — 6900 Delmar and 6901 Washington, University City">
+    <div class="img-caption">6900 Delmar (dome) and 6901 Washington (bell tower) — from the northeast</div>
+
+    <div class="section-body">
+      At the intersection of Delmar Boulevard, Trinity Avenue, and Washington Avenue in University City — surrounded by COCA (Center of Creative Arts) and the Washington University Music Center — two churches built four years apart sit on a single block. Both are being transformed into a cultural campus.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="section-label">6900 Delmar — Reason</div>
+
+    <div class="section-title">The Dome</div>
+
+    <div class="section-body">
+      Former First Church of Christ, Scientist. Completed 1924. T.P. Barnett Co., Architects. <strong>Individually listed on the National Register of Historic Places.</strong> A 78-foot coffered plaster dome suspended from a 1927 steel truss roof structure. Original chandelier hoist system intact. Accessible catwalk in the void above the dome. Spiral staircases. Reading rooms. A foyer and mezzanine wrapped around the auditorium.
+    </div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-value">78 ft</div>
+        <div class="stat-label">Dome diameter</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">~48 ft</div>
+        <div class="stat-label">Floor to apex</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">~12,000</div>
+        <div class="stat-label">SF all levels</div>
+      </div>
+    </div>
+
+    <div class="img-grid-2">
+      <img src="images/dome-interior.jpg" alt="6900 Delmar — coffered dome interior from mezzanine">
+      <img src="images/dome-truss.jpg" alt="6900 Delmar — 1927 steel truss structure above dome">
+    </div>
+    <div class="img-caption">Left: Coffered dome from the mezzanine. Right: 1927 steel truss structure — 23 ft void above the plaster dome.</div>
+
+    <div class="section-divider"></div>
+
+    <div class="section-label">6901 Washington — Mystery</div>
+
+    <div class="section-title">The Sanctuary</div>
+
+    <div class="section-body">
+      Gothic Revival. Stone masonry, stained glass, bell tower. A 250-seat sanctuary with raked seating and a 60-seat balcony. Ten classrooms, a fellowship hall, kitchen, offices, and a library. The building that becomes the championship venue — and continues as a performance, event, and cultural space long after the match ends.
+    </div>
+
+    <img class="img-full" src="images/6901-interior-vision.jpg" alt="6901 Washington — sanctuary interior, current and vision">
+    <div class="img-caption">6901 Washington — current condition and vision studies</div>
+
+    <div class="section-body">
+      <strong>The buildings are owned, not leased.</strong> No rent burden. No landlord. The campus vision doesn't depend on a single event — the World Chess Championship is a catalyst, not a business plan. The buildings are the business plan.
+    </div>
+
+    <img class="img-full" src="images/banner-6900.jpg" alt="Banner mockup on 6900 Delmar facade — 2026 World Chess Championship">
+    <div class="img-caption">6900 Delmar — banner visualization</div>
+
+  </div>
+
+  <!-- ======== TAB: THE SET ======== -->
+  <div id="tab-set" class="tab-panel">
+
+    <div class="section-label">Proof of Concept</div>
+
+    <div class="section-title">The St. Louis Chess Set</div>
+
+    <div class="section-body">
+      A custom chess set designed for St. Louis. Every piece represents a civic landmark, cultural institution, or identity. The King is the Saint Louis Chess Club. The Rooks are the two buildings — 6900 Delmar and 6901 Washington. The Queen carries the rivers and the fleur-de-lis. The Knight is a Budweiser Clydesdale. The Bishops bear the Cardinals and the Blues. The Pawns are fleur-de-lis.
+    </div>
+
+    <div class="section-body">
+      Red and gold — from the city flag. Red for the field: courage, the blood that built this place. Gold for the bezant: the city itself, the convergence point.
+    </div>
+
+    <div class="img-grid-2">
+      <img src="images/set-gold.png" alt="St. Louis Chess Set — gold side">
+      <img src="images/set-red.png" alt="St. Louis Chess Set — red side">
+    </div>
+    <div class="img-caption">The St. Louis Chess Set — Gold and Red</div>
+
+    <div class="img-grid-3">
+      <img src="images/piece-queen.png" alt="Queen — The Rivers">
+      <img src="images/piece-knight.png" alt="Knight — Clydesdale">
+      <img src="images/piece-king.png" alt="King — St. Louis Chess Club">
+    </div>
+    <div class="img-caption">Queen (The Rivers) · Knight (Clydesdale) · King (Chess Club)</div>
+
+    <div class="section-divider"></div>
+
+    <div class="section-body">
+      This set was conceived, designed, and fabricated in weeks — from a conversation at a coffee shop to a physical object in hand. It demonstrates a creative pipeline: the ability to take an idea, give it form, and put it in someone's hands while the conversation is still warm. The venue is a different kind of project — architecture, engineering, historic preservation, construction. But the instinct is the same: move from vision to reality, and let the objects speak for themselves.
+    </div>
+
+    <div class="section-body">
+      The full set — including board design, piece descriptions, and fabrication detail — is live at:<br>
+      <a href="https://micahroufa.github.io/stlchess/stl-chess-set.html" target="_blank" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim);">micahroufa.github.io/stlchess</a>
+    </div>
+
+  </div>
+
+  <!-- ======== TAB: THE MOMENT ======== -->
+  <div id="tab-moment" class="tab-panel">
+
+    <div class="section-label">The Window</div>
+
+    <div class="section-title">The Moment Is Now</div>
+
+    <div class="section-body">
+      The FIDE Candidates Tournament is underway in Cyprus. Eight grandmasters are competing for the right to challenge World Champion Gukesh Dommaraju. <strong>Two of them are American.</strong>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">March 28 – April 16, 2026</div>
+      <div class="timeline-text"><strong>FIDE Candidates Tournament</strong> — Paphos, Cyprus. Fabiano Caruana (world #1 classical rating, St. Louis ties) and Hikaru Nakamura (world #2, major online presence) are both in the field. If either wins, the next World Champion could be American.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">April – May 2026</div>
+      <div class="timeline-text"><strong>Venue bidding opens.</strong> FIDE accepts bids for the World Championship match venue. Bid requires a €300,000 bank guarantee and a formal application. Players inspect the venue two days before the match begins.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">November 2026</div>
+      <div class="timeline-text"><strong>World Chess Championship Match.</strong> The challenger faces Gukesh Dommaraju. 14 games. The most-watched event in chess. The venue and the host city become part of the permanent record.</div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="section-body">
+      St. Louis already hosts the Grand Chess Tour Finals, the Sinquefield Cup, and the U.S. Championship. The broadcast infrastructure exists. The institutional knowledge exists. The audience exists. What doesn't yet exist is a venue that matches the ambition.
+    </div>
+
+    <div class="pull-quote">
+      The first World Chess Championship was held in St. Louis in 1886. The buildings at 6900 Delmar and 6901 Washington are ready to bring it home.
+      <div class="pull-quote-source">Come see them.</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div class="footer">
+  <div class="footer-line">Confidential</div>
+  <div class="footer-line">&copy; 2026 Pre_Post, LLC &mdash; All Rights Reserved</div>
+</div>
+
+<!-- ============ SCRIPT ============ -->
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
